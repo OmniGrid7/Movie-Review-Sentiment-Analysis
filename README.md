@@ -3,7 +3,7 @@
 Fine-tuning `bert-base-uncased` on a subset of the IMDb dataset to classify movie reviews as positive or negative.
 
 ## Running it
-Upload `Movie_review_setiment_analysis_using_IMDB.ipynb` to Google Colab. 
+Upload `Movie_review_setiment_analysis_using_IMDB.ipynb` to Google Colab. Selected run time type to GPU
 
 ## Dataset
 Uses a balanced sample instead of the full 50k reviews so it trains quickly:
