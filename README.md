@@ -1,4 +1,4 @@
-# Movie Review Sentiment Analysis (BERT)
+# Movie Review Sentiment Analysis
 
 Fine-tuning `bert-base-uncased` on a subset of the IMDb dataset to classify movie reviews as positive or negative.
 
