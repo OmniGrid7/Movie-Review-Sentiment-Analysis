@@ -25,7 +25,7 @@ Change `TRAIN_SIZE`, `VAL_SIZE`, `TEST_SIZE` near the top if you want to scale u
 9. Save the model
 10. Load it back and confirm it still works
 11. LIME explainability - see which words drove a prediction
-12. Notes / what to try next
+
 
 ## Output files
 Running the notebook creates:
