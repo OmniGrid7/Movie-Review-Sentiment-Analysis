@@ -1,9 +1,9 @@
-# Movie Review Sentiment Analysis
+# Movie Review Sentiment Analysis (BERT) + Agentic Recommendation System
 
-Fine-tuning `bert-base-uncased` on a subset of the IMDb dataset to classify movie reviews as positive or negative.
+Fine-tunes `bert-base-uncased` on a subset of IMDb reviews to classify sentiment, then plugs that model into a LangChain-based agentic movie recommendation system (structured to match the Coding Blocks research paper intelligence notebook pattern - tools + `create_agent` + `ChatGroq`).
 
 ## Running it
-Upload `Movie_review_setiment_analysis_using_IMDB.ipynb` to Google Colab. Selected run time type to GPU
+Upload `notebook.ipynb` to Google Colab, switch the runtime to GPU (Runtime > Change runtime type > T4 GPU), then run all cells top to bottom. When you reach the agent section you'll need a **Groq API key** (free at console.groq.com) - either add it to Colab's secret manager as `GROQ_API_KEY`, or paste it directly into the `GROQ_API_KEY` variable, or leave it blank and it'll prompt you.
 
 ## Dataset
 Uses a balanced sample instead of the full 50k reviews so it trains quickly:
@@ -25,7 +25,18 @@ Change `TRAIN_SIZE`, `VAL_SIZE`, `TEST_SIZE` near the top if you want to scale u
 9. Save the model
 10. Load it back and confirm it still works
 11. LIME explainability - see which words drove a prediction
+12. **Agentic movie recommendation system** - LangChain tools + `create_agent` + `ChatGroq`, plus a manual tool-calling walkthrough and a critic pass
+13. Notes / what to try next
 
+## The agent system
+Built with LangChain, matching the tools-and-agent pattern from the reference notebook:
+- `search_movies`, `analyze_review_sentiment`, `get_movie_details` are `@tool`-decorated functions
+- `analyze_review_sentiment` calls the **BERT model trained earlier in the notebook**, not the LLM
+- `create_agent(model=llm, tools=tools)` builds the agent; `llm` is `ChatGroq` (`llama-3.1-8b-instant`)
+- a manual walkthrough (`bind_tools`, reading `tool_calls`, building a `ToolMessage`) shows what the agent is doing internally
+- a separate critic pass (a plain `llm.invoke` with a `SystemMessage` of rules) checks the recommendations against the original request
+
+The movie database is a small hand-written sample (~10 movies) for demo purposes. Swap `search_movies`/`get_movie_details` for real API calls (TMDB, OMDb) if you want it working with live data - nothing else in the pipeline needs to change.
 
 ## Output files
 Running the notebook creates:
