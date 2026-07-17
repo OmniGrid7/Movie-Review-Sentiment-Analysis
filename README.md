@@ -4,7 +4,7 @@ Fine-tunes `bert-base-uncased` on a subset of IMDb reviews to classify sentiment
 
 ## Requirements
 - A Google account (to run Colab)
-- A **Groq API key** - free, from https://console.groq.com/keys (only needed for Part 12, the agent section)
+- A **Groq API key** - free (only needed for the agent section)
 - Nothing needs installing locally - the notebook installs everything it needs in its first cells
 
 ## Running it
@@ -53,7 +53,7 @@ Training took about 4 minutes for all 3 epochs on a free-tier T4. Final training
 12. **Agentic movie recommendation system** - LangChain tools + `create_agent` + `ChatGroq`, a manual tool-calling walkthrough, and a critic pass
 13. Notes / what to try next
 
-## The agent system (Part 12)
+## The agent system 
 - `search_movies`, `analyze_review_sentiment`, `get_movie_details` are `@tool`-decorated functions the agent can call
 - `analyze_review_sentiment` runs the **BERT model trained earlier in this same notebook** - not the LLM - so Part 6 needs to have already run in your session
 - `create_agent(model=llm, tools=tools)` builds the agent; `llm` is `ChatGroq` (`llama-3.1-8b-instant`, Groq's free tier)
